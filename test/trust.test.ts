@@ -18,8 +18,8 @@ let config = {} as { [key: string]: any }
  */
 beforeAll(async () => {
   const [privateKey, certificate] = await Promise.all([
-    await readFile('data/key.pem'),
-    await readFile('data/certificate.pem')
+    await readFile('data/OP_key.pem'),
+    await readFile('data/OP_certificate.pem')
   ])
 
   // Certificate chain

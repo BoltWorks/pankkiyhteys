@@ -51,8 +51,8 @@ describe('Test soap base class', () => {
   })
 
   it('Test signed request', async () => {
-    const privateKey = read('./data/key.pem')
-    const certificate = read('./data/certificate.pem')
+    const privateKey = read('./data/OP_key.pem')
+    const certificate = read('./data/OP_certificate.pem')
     const key = new Key(privateKey, certificate)
 
     const client = new SoapClient()
@@ -76,8 +76,8 @@ describe('Test soap base class', () => {
   })
 
   it('Test invalid responses', async () => {
-    const privateKey = read('./data/key.pem')
-    const certificate = read('./data/certificate.pem')
+    const privateKey = read('./data/OP_key.pem')
+    const certificate = read('./data/OP_certificate.pem')
     const key = new Key(privateKey, certificate)
     const client = new SoapClient()
     const trustStore = {

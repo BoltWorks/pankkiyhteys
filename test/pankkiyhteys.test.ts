@@ -15,8 +15,8 @@ describe('Test osuuspankki client', () => {
 
   beforeAll(async () => {
     const [privateKey, certificate] = await Promise.all([
-      readFile('data/key.pem'),
-      readFile('data/certificate.pem')
+      readFile('data/OP_key.pem'),
+      readFile('data/OP_certificate.pem')
     ])
 
     key = new Key(privateKey, certificate)
