@@ -110,7 +110,7 @@ export class Osuuspankki extends app.Client {
     const {
       CertApplicationResponse: {
         Certificates: {
-          Certificate: { Name, Certificate, CertificateFormat }
+          Certificate: { Certificate }
         }
       }
     } = applicationResponse
@@ -178,7 +178,7 @@ export class Osuuspankki extends app.Client {
     const {
       CertApplicationResponse: {
         Certificates: {
-          Certificate: { Name, Certificate, CertificateFormat }
+          Certificate: { Certificate }
         }
       }
     } = applicationResponse

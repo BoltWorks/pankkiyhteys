@@ -82,7 +82,7 @@ export class Key {
     const modulusLength = 2048
     debug(`Generating ${modulusLength}-bit key-pair...`)
 
-    const { publicKey, privateKey } = await promisify(generateKeyPair)('rsa', {
+    const { privateKey } = await promisify(generateKeyPair)('rsa', {
       modulusLength,
       publicKeyEncoding: {
         type: 'spki',
