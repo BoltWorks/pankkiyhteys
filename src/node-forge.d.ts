@@ -242,7 +242,7 @@ declare module 'node-forge' {
        *
        * @return the extension or null if not found.
        */
-      getExtension(options: string | { name: string } | { id: number }): {} | undefined
+      getExtension(options: string | { name: string } | { id: number }): {} | undefined // eslint-disable-line @typescript-eslint/ban-types
 
       /**
        * Signs this certificate using the given private key.

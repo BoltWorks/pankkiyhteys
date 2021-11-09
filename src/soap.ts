@@ -44,13 +44,18 @@ export default class SoapClient {
    * @param url Endpoint url.
    * @param body Soap request body element.
    */
-  makeSoapRequest(url: string, body: {}): Promise<any>
+  makeSoapRequest(url: string, body: Record<string, unknown>): Promise<any>
   // ?? I guess I have tried to make a type that requires truststore if key is present.
-  makeSoapRequest(url: string, body: {}, signatureKey?: Key, trustStore?: TrustStore): Promise<any>
+  makeSoapRequest(
+    url: string,
+    body: Record<string, unknown>,
+    signatureKey?: Key,
+    trustStore?: TrustStore
+  ): Promise<any>
 
   async makeSoapRequest(
     url: string,
-    body: {},
+    body: Record<string, unknown>,
     signatureKey?: Key,
     trustStore?: TrustStore
   ): Promise<any> {
@@ -119,6 +124,7 @@ export default class SoapClient {
         // Verify response envelope if request had signature.
         if (signatureKey) {
           // Verify xml signature. This throws if verification fails.
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           await this.verifyEnvelopeSignature(response, document, trustStore!)
         }
 
