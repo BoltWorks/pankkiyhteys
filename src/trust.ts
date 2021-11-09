@@ -17,7 +17,7 @@ export type X509Pem = string
 type XMLElement = ReturnType<xpath.XPathSelect>
 
 /** Callback that loads new intermediary certificates. */
-type LoadCertificatesCallback = (trustStore: TrustStore) => Promise<void>
+export type LoadCertificatesCallback = (trustStore: TrustStore) => Promise<void>
 
 /** Directory name for intermediary cache directory. */
 const TMP_DIRNAME = 'pankkiyhteys'
@@ -98,14 +98,14 @@ export class Key {
   }
 }
 
-interface SignExtraOptions {
+export interface SignExtraOptions {
   wssecurity?: boolean
   canonicalizationAlgorithm?:
     | 'http://www.w3.org/TR/2001/REC-xml-c14n-20010315'
     | 'http://www.w3.org/2001/10/xml-exc-c14n#'
 }
 
-type SignOptions = ComputeSignatureOptions & SignExtraOptions
+export type SignOptions = ComputeSignatureOptions & SignExtraOptions
 
 /**
  * Convert certificate signing request to base64 encoded der
