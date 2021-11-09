@@ -193,11 +193,11 @@ export class Osuuspankki extends app.Client {
 }
 
 // In getFileList / getFile, Nordea requires some options to be present.
-interface NordeaRequiredGetFileOptions {
+export interface NordeaRequiredGetFileOptions {
   FileType: string
   TargetId: string
 }
-interface NordeaRequiredGetFileListOptions extends NordeaRequiredGetFileOptions {
+export interface NordeaRequiredGetFileListOptions extends NordeaRequiredGetFileOptions {
   Status: app.FileStatus
 }
 

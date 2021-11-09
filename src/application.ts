@@ -18,7 +18,7 @@ const gunzip = promisify(zlib.gunzip)
 
 export const VERSION_STRING = 'pankkiyhteys v0.10'
 
-type XMLDocument = any
+export type XMLDocument = any
 type XMLElement = Node
 
 export type CompressionMethod = 'RFC1952' | 'GZIP'
