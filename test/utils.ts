@@ -9,7 +9,7 @@ import { Key } from '../src/trust'
  *
  * Paths are relative to test/ directory.
  */
-export const readFile = (filename: string, encoding = 'utf8') =>
+export const readFile = (filename: string, encoding: BufferEncoding = 'utf8') =>
   promisify(fs.readFile)(path.join(__dirname, filename), encoding)
 
 interface KeyGenerationErrors {
