@@ -3,7 +3,7 @@ import { Environment } from '../src/application'
 import TrustStore, { Key } from '../src/trust'
 import { readFile, createCertificate, forgeToKey } from './utils'
 
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 import { namespaces } from '../src/xml'
 import * as xpath from 'xpath'
 import * as path from 'path'

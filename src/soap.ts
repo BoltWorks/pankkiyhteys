@@ -3,7 +3,7 @@ import * as builder from 'xmlbuilder'
 import * as xpath from 'xpath'
 import createDebug from 'debug'
 import { v4 as uuid } from 'uuid'
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 
 import TrustStore, { Key, verifySignature, sign } from './trust'
 import * as xml from './xml'

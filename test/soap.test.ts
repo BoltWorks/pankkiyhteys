@@ -6,7 +6,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as xpath from 'xpath'
 import * as xml from '../src/xml'
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 
 // Mock network requests
 jest.mock('request-promise-native')

@@ -8,7 +8,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as builder from 'xmlbuilder'
 
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 
 const SoapReferences = ['#timestamp', '#body']
 

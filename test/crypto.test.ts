@@ -4,7 +4,7 @@ import { readFile } from './utils'
 import * as path from 'path'
 import * as xpath from 'xpath'
 
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 import { namespaces, getSoapSignature } from '../src/xml'
 
 let config = {} as { [key: string]: any }

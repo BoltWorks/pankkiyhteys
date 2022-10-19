@@ -11,7 +11,7 @@ import * as xpath from 'xpath'
 import * as path from 'path'
 
 import { namespaces } from '../src/xml'
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 
 function read(file: string) {
   return readFileSync(path.join(__dirname, file), 'utf8')
