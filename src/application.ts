@@ -3,7 +3,7 @@
  */
 
 import * as builder from 'xmlbuilder'
-import * as parser from 'fast-xml-parser'
+import { XMLParser } from 'fast-xml-parser'
 import * as xpath from 'xpath'
 import * as zlib from 'zlib'
 import { promisify } from 'util'
@@ -403,8 +403,11 @@ export async function parseApplicationResponse(response: XMLElement, preprocess?
     await preprocess(xml, document)
   }
 
+  const parser = new XMLParser({
+    removeNSPrefix: true
+  })
   // Return parsed response
-  return parser.parse(xml, { ignoreNameSpace: true })
+  return parser.parse(xml)
 }
 
 /**
