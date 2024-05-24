@@ -112,7 +112,7 @@ export type SignOptions = ComputeSignatureOptions & SignExtraOptions
  *
  * @param csr
  */
-function encodeSigningRequest(csr: pki.Certificate) {
+function encodeSigningRequest(csr: pki.CertificateSigningRequest) {
   return util.encode64(asn1.toDer(pki.certificationRequestToAsn1(csr)).getBytes())
 }
 

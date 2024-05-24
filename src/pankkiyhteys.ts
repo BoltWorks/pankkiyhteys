@@ -224,7 +224,7 @@ export class Nordea extends app.Client {
   }
 
   private static getEndpoint() {
-    return `https://filetransfer.nordea.com/services/CorporateFileService`
+    return `https://filetransfer.nordea.com/services/CorporateFileService/sha2`
   }
 
   override getFileList(
