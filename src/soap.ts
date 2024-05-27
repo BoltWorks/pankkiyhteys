@@ -1,4 +1,3 @@
-import * as request from 'request-promise-native'
 import * as builder from 'xmlbuilder'
 import * as xpath from 'xpath'
 import createDebug from 'debug'
@@ -110,41 +109,45 @@ export default class SoapClient {
       xmlBody = this.signEnvelope(xmlBody, signatureKey)
     }
 
-    return request
-      .post(url, {
-        body: xmlBody,
-        headers: {
-          'Content-Type': 'text/xml; charset=utf-8'
-        }
-      })
-      .then(async response => {
-        const select = xpath.useNamespaces({
-          soap: xml.namespaces.soap,
-          dsig: xml.namespaces.dsig,
-          wsse: xml.namespaces.wsse
-        })
+    const response = await fetch(url, {
+      method: 'POST',
+      body: xmlBody,
+      headers: {
+        'Content-Type': 'text/xml; charset=utf-8'
+      }
+    })
+    const { ok, status } = response
+    const responseText = await response.text()
+    if (!ok) {
+      throw new Error(`StatusCodeError ${status} - ${responseText}`)
+    }
 
-        const document = new DOMParser().parseFromString(response)
-        const responseBody = select('/soap:Envelope/soap:Body', document, true)
+    const select = xpath.useNamespaces({
+      soap: xml.namespaces.soap,
+      dsig: xml.namespaces.dsig,
+      wsse: xml.namespaces.wsse
+    })
 
-        // Verify response envelope if request had signature.
-        if (signatureKey) {
-          // Verify xml signature. This throws if verification fails.
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          await this.verifyEnvelopeSignature(response, document, trustStore!)
-        }
+    const document = new DOMParser().parseFromString(responseText)
+    const responseBody = select('/soap:Envelope/soap:Body', document, true)
 
-        /**
-         * @todo verify envelope signature
-         * @note cert request envelopes are not signed
-         */
+    // Verify response envelope if request had signature.
+    if (signatureKey) {
+      // Verify xml signature. This throws if verification fails.
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      await this.verifyEnvelopeSignature(responseText, document, trustStore!)
+    }
 
-        if (responseBody) {
-          return (responseBody as Node).firstChild
-        }
+    /**
+     * @todo verify envelope signature
+     * @note cert request envelopes are not signed
+     */
 
-        return null
-      })
+    if (responseBody) {
+      return (responseBody as Node).firstChild
+    }
+
+    return null
   }
 
   /**
