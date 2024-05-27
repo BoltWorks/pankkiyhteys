@@ -4,7 +4,7 @@
 
 import createDebug from 'debug'
 
-import { generateSigningRequest, Key } from './trust'
+import { generateSigningRequest, Key, SignOptions } from './trust'
 import * as app from './application'
 import * as builder from 'xmlbuilder'
 
@@ -15,6 +15,8 @@ import { pki } from 'node-forge'
 export const debug = createDebug('pankkiyhteys')
 
 export { Key } from './trust'
+export type { FileDescriptor } from './application'
+export type { SignOptions } from './trust'
 
 export interface CertApplicationRequest {
   '@xmlns': string
@@ -212,8 +214,23 @@ export class Nordea extends app.Client {
     const endpoint = Nordea.getEndpoint()
     const bic = 'NDEAFIHH'
     const compressionMethod = 'GZIP'
+    const signOptions: SignOptions = {
+      digestAlgorithm: 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signatureAlgorithm: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
+      wssecurity: true
+    }
 
-    super(username, key, language, bic, endpoint, certService, environment, compressionMethod)
+    super(
+      username,
+      key,
+      language,
+      bic,
+      endpoint,
+      certService,
+      environment,
+      compressionMethod,
+      signOptions
+    )
 
     // Fetching itermediary certs is not implemented for the Nordea client,
     // add root certs to intermediaries so that TrustStore.verifyCertificate

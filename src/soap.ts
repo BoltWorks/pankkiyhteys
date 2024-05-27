@@ -5,7 +5,7 @@ import createDebug from 'debug'
 import { v4 as uuid } from 'uuid'
 import { DOMParser } from '@xmldom/xmldom'
 
-import TrustStore, { Key, verifySignature, sign } from './trust'
+import TrustStore, { Key, verifySignature, sign, SignOptions } from './trust'
 import * as xml from './xml'
 
 const debug = createDebug('pankkiyhteys')
@@ -13,6 +13,12 @@ const debug = createDebug('pankkiyhteys')
 const BINARY_SECURITY_TOKEN_ID = 'BinarySecurityToken'
 
 export default class SoapClient {
+  signOptions: undefined | SignOptions
+
+  constructor(signOptions?: SignOptions) {
+    this.signOptions = signOptions
+  }
+
   /**
    * Helper method to format time string.
    */
@@ -210,7 +216,9 @@ export default class SoapClient {
       ],
       keyInfo,
       {
+        ...this.signOptions,
         wssecurity: true,
+
         location: {
           reference: "/*/*[local-name(.)='Header']/*[local-name(.)='Security']",
           action: 'append'
