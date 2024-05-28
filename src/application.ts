@@ -3,14 +3,14 @@
  */
 
 import * as builder from 'xmlbuilder'
-import * as parser from 'fast-xml-parser'
+import { XMLParser } from 'fast-xml-parser'
 import * as xpath from 'xpath'
 import * as zlib from 'zlib'
 import { promisify } from 'util'
 import { DOMParser } from '@xmldom/xmldom'
 import { namespaces, isElementSigned, X509ToCertificate } from './xml'
 import createDebug from 'debug'
-import TrustStore, { Key, sign, verifySignature } from './trust'
+import TrustStore, { Key, SignOptions, sign, verifySignature } from './trust'
 import SoapClient from './soap'
 
 const debug = createDebug('pankkiyhteys')
@@ -168,9 +168,10 @@ export class Client extends SoapClient {
     endpoint: string,
     certService: CertService,
     environment = Environment.PRODUCTION,
-    compressionMethod: CompressionMethod = 'RFC1952'
+    compressionMethod: CompressionMethod = 'RFC1952',
+    signOptions?: SignOptions
   ) {
-    super()
+    super(signOptions)
 
     this.username = username
     this.key = key
@@ -352,7 +353,8 @@ export class Client extends SoapClient {
     }
 
     return sign(xml, this.key, [], {
-      canonicalizationAlgorithm: 'http://www.w3.org/TR/2001/REC-xml-c14n-20010315'
+      canonicalizationAlgorithm: 'http://www.w3.org/TR/2001/REC-xml-c14n-20010315',
+      ...this.signOptions
     })
   }
 
@@ -403,8 +405,11 @@ export async function parseApplicationResponse(response: XMLElement, preprocess?
     await preprocess(xml, document)
   }
 
+  const parser = new XMLParser({
+    removeNSPrefix: true
+  })
   // Return parsed response
-  return parser.parse(xml, { ignoreNameSpace: true })
+  return parser.parse(xml)
 }
 
 /**

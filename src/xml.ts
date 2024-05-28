@@ -32,7 +32,8 @@ export function getSignatureReferences(signature: any) {
     dsig: namespaces.dsig
   })
 
-  return select('./dsig:SignedInfo/dsig:Reference/@URI', signature).map(({ value }: any) => value)
+  const referenceElements = select('./dsig:SignedInfo/dsig:Reference/@URI', signature) as Node[]
+  return referenceElements.map(({ value }: any) => value)
 }
 
 /**

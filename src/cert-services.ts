@@ -99,7 +99,7 @@ export class OsuuspankkiCertService extends SoapClient implements app.CertServic
 
 export class NordeaCertService extends SoapClient implements app.CertService {
   getEndpoint(): string {
-    return `https://filetransfer.nordea.com/services/CertificateService`
+    return `https://filetransfer.nordea.com/services/CertificateService/sha2`
   }
 
   applicationRequestXmlns = 'http://bxd.fi/xmldata/'
