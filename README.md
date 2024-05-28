@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/hyrsky/pankkiyhteys.svg?branch=master)](https://travis-ci.org/hyrsky/pankkiyhteys)
-
 # Pankkiyhteys
 
 This library is an implementation of Web Services API, a standardised solution used for automated communications between banks and corporate customers.
@@ -10,6 +8,13 @@ Nordea client can be used with existing certificates to make normal Web Services
 sending files. Certificate renewal isn't currently supported with the Nordea client. 
 
 For in depth technical documentation about Web Services [click here](https://www.finanssiala.fi/wp-content/uploads/2021/03/WebServices_Messages_v110_20200504.pdf).
+
+# Bolt.Works fork
+
+This fork is maintained by Bolt.Works, and focuses on Nordea support.  
+We have an unmerged PR to the upstream repository, which adds Nordea support. 
+The fork has gone through a lot of changes since its inception, and, since we don't use
+the original Osuuspankki client, whether or not this fork works with Osuuspankki is unknown.
 
 ## Install
 
